@@ -17,6 +17,8 @@
 // Fonction max()
 #include <algorithm>
 
+# define M_PI           3.14159265358979323846  /* pi */
+
 using namespace std;
 
 int simulation_trajectoire_mvt_brownien();

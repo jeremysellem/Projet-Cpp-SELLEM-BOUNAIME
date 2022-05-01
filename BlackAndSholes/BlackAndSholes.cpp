@@ -18,31 +18,31 @@ double calculerD2(double prixSt, double ecartType, long periodT, double tauxR, d
     return calculerD1(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) - ecartType * sqrt(periodT);
 }
 
-double loi_normale(double a, double b, int n){
+double loi_normale(double a, double b, double n){
     double somme = 0;
-    float pas = (b - a)/ n;
-    int x = a;
-    for (int i=0; i < n ; i++){
-        somme += pas * exp(-(x*x)/2)/(sqrt(2*3.14));
+    double pas = (b - a)/ n;
+    double x = a;
+    for (double i=0; i < n ; i++){
+        somme += pas * exp(-(x*x)/2)/(sqrt(2*M_PI));
         x += pas;
     }
     return somme;
 }
 
 double calculerLoiNormaleD1(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende){
-    return loi_normale(-10*exp(1000), calculerD1(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) , 10000000);
+    return loi_normale(-1000000, calculerD1(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) , 10000000);
 }
 
 double calculerLoiNormaleD2(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende){
-    return loi_normale(-10*exp(1000), calculerD2(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) , 10000000);
+    return loi_normale(-1000000, calculerD2(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) , 10000000);
 }
 
 double calculerLoiNormale_D1(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende){
-    return loi_normale(-10*exp(1000), calculerD1(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) , 10000000);
+    return loi_normale(-1000000, -calculerD1(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) , 10000000);
 }
 
 double calculerLoiNormale_D2(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende){
-    return loi_normale(-10*exp(1000), calculerD2(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) , 10000000);
+    return loi_normale(-1000000, -calculerD2(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) , 10000000);
 }
 
 double getPrixCall(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende){
@@ -166,3 +166,9 @@ int main() {
 		}
 	};
 }
+
+
+// int main(){
+//     cout<< calculerLoiNormaleD1(100,0.25,5,0.01,100,0);
+//     return 0;
+// }
