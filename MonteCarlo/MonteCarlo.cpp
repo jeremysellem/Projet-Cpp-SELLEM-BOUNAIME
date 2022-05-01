@@ -16,12 +16,11 @@ double genererNbreLoiNormale() {
 }
 
 list<double> simuler_une_trajectoire(double prixS0, long periodT, double r, double ecartType) {
-	double G = genererNbreLoiNormale();
 	double Si;
 	list<double> single_list;
 	single_list.push_back(prixS0);
-    for (long i = 1; i < periodT; i++) {
-    	Si = prixS0 * exp((r - (ecartType / 2)) * i + ecartType * sqrt(i) * genererNbreLoiNormale());
+	for (double i = 0; i < periodT; i += 0.05) {
+		Si = prixS0 * exp((r - (pow(ecartType, 2) / 2)) * periodT + ecartType * sqrt(periodT) * genererNbreLoiNormale());
     	single_list.push_back(Si);
     }
     return single_list;
@@ -40,7 +39,7 @@ list<list<double> > simuler_N_trajectoire(double prixS0, int N, long periodT, do
 
 // Retourne le payoff d'une trajectoire
 double calculerPayOff(list<double> l, double strikeK, bool isCall) {
-	return isCall ? max(*l.end() - strikeK, 0.0) : max(strikeK - *l.end(), 0.0);
+	return isCall ? max(l.back() - strikeK, 0.0) : max(strikeK - l.back(), 0.0);
 }
 
 // Retourne la somme des payoffs d'une liste de trajectoires
@@ -57,34 +56,81 @@ double calculerMoyennePayOffs(list<list<double> > l, double strikeK, bool isCall
 	return calculerPayOffs(l, strikeK, isCall) / l.size();
 }
 
-double getPrixCall(double prixS0, long periodT, double r, double ecartType, double strikeK) {
-	int N = 1000;
+double getPrix(double prixS0, long N, long periodT, double r, double ecartType, double strikeK, bool isCall) {
 	list<list<double> > trajectoires = simuler_N_trajectoire(prixS0, N, periodT, r, ecartType);
-	double moyenne_payoffs = calculerMoyennePayOffs(trajectoires, strikeK, true);
+	double moyenne_payoffs = calculerMoyennePayOffs(trajectoires, strikeK, isCall);
 	return exp(-r * periodT) * moyenne_payoffs;
 }
 
-double getPrixPut(double prixS0, long periodT, double r, double ecartType, double strikeK) {
-	int N = 1000;
-	list<list<double> > trajectoires = simuler_N_trajectoire(prixS0, N, periodT, r, ecartType);
-	double moyenne_payoffs = calculerMoyennePayOffs(trajectoires, strikeK, false);
-	return exp(-r * periodT) * moyenne_payoffs;
+string menu() {
+	return "\n1 getPrixCall\n2 getPrixPut\n3 exit\nVotre choix : ";
+}
+
+void user_getPrixOption(bool isCall) {
+
+	string answer = "";
+	string optionType = isCall ? "Call : " : "Put : ";
+
+	cout << "Paramètres du " << optionType << endl;
+	cout << "Volatilité : ";
+	cin >> answer;
+	double ecartType = atof(answer.c_str());
+
+	long nbSimulations, periodT;
+	try {
+		cout << "nbSimulations : ";
+		cin >> answer;
+		nbSimulations = stoi(answer.c_str());
+
+		cout << "T : ";
+		cin >> answer;
+		periodT = stoi(answer.c_str());
+	}
+	catch (invalid_argument&) {
+		periodT = 1;
+	}
+
+	cout << "S0 : ";
+	cin >> answer;
+	double prixS0 = atof(answer.c_str());
+
+	cout << "K : ";
+	cin >> answer;
+	double prixStrikeK = atof(answer.c_str());
+
+	cout << "R : ";
+	cin >> answer;
+	double tauxR = atof(answer.c_str());
+
+	cout << "---------------------" << endl;
+	cout << "Prix du " << optionType << getPrix(prixS0, nbSimulations, periodT, tauxR, ecartType, prixStrikeK, isCall) << endl;
 }
 
 int main() {
-	int N  = 40;
-	double prixS0 = 100;
-	long periodT = 50;
-	double r = 0.02;
-	double ecartType = 0.25;
-	list<list<double> > trajectoires = simuler_N_trajectoire(prixS0, N, periodT, r, ecartType);
-	list<list<double> >::iterator it;
-	list<double>::iterator it2;
-	for (it = trajectoires.begin(); it != trajectoires.end(); it++) {
-		for (it2 = (*it).begin(); it2 != (*it).end(); it2++) {
-			cout << (*it2) << ",";
+
+	// L'utilisateur arrive sur le menu principal
+	// Tant que sa réponse n'est pas exit on continue
+	string answer = "0";
+	while (stoi(answer) != 3) {
+		cout << menu();
+		cin >> answer;
+		try {
+			switch (stoi(answer)) {
+				case 1:
+					user_getPrixOption(true);
+					break;
+				case 2:
+					user_getPrixOption(false);
+					break;
+				case 3:
+					return 0;
+				default:
+					answer = "0";
+					break;
+			}
 		}
-		cout << endl;
-	}
-	return 0;
+		catch (exception&) {
+			answer = "0";
+		}
+	};
 }

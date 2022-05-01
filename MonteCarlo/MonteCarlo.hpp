@@ -17,12 +17,26 @@
 using namespace std;
 
 double genererNbreLoiNormale();
-list<double> simuler_une_trajectoire(double prixS0, long periodT, double r, double ecartType) ;
+
+list<double> simuler_une_trajectoire(double prixS0, long periodT, double r, double ecartType);
+
 list<list<double> > simuler_N_trajectoire(double prixS0, int N, long periodT, double r, double ecartType);
+
+// Retourne le payoff d'une trajectoire
 double calculerPayOff(list<double> l, double strikeK, bool isCall);
+
+// Retourne la somme des payoffs d'une liste de trajectoires
 double calculerPayOffs(list<list<double> > l, double strikeK, bool isCall);
-double calculerMoyennePayOffs(list<list<double> >, double strikeK, bool isCall);
-double getPrixCall(double prixS0, long periodT, double r, double ecartType, double strikeK);
-double getPrixPut(double prixS0, long periodT, double r, double ecartType, double strikeK);
+
+// Retourne la moyenne des payoffs d'une liste de trajectoires
+double calculerMoyennePayOffs(list<list<double> > l, double strikeK, bool isCall);
+
+double getPrix(double prixS0, long N, long periodT, double r, double ecartType, double strikeK, bool isCall);
+
+string menu();
+
+void user_getPrixOption(bool isCall);
+
+int main();
 
 #endif /* PROJET_MONTECARLO_MONTECARLO_HPP_ */
