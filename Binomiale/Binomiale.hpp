@@ -66,15 +66,15 @@ double getCallPayoffTerminal(double prixS0, double u, double d, int j, long peri
 double getPutPayoffTerminal(double prixS0, double u, double d, int j, long periodT, double prixStrikeK);
 
 // Retourne le prix d'une option (Call/Put selon argument) suivant les paramètres donnés
-double getPrix(double prixS0, double ecartType, long maturite, long periodT, double tauxR, double prixStrikeK, bool isCall);
+double getPrixBino(double prixS0, double ecartType, long maturite, long periodT, double tauxR, double prixStrikeK, bool isCall);
 
 // Affiche le menu principal où l'utilisateur sélectionne ses choix
-string menu();
+string BinomialeMenu();
 
 // Cette focntion demande à l'utilisateur les paramètres de l'option
-void user_getPrixOption(bool isCall);
+void user_getPrixOptionBino(bool isCall);
 
 // Lance le menu principal
-int main();
+int BinomialeMain();
 
 #endif /* PROJET_BINOMIALE_BINOMIALE_HPP_ */

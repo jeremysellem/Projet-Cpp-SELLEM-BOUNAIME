@@ -31,12 +31,12 @@ double calculerPayOffs(list<list<double> > l, double strikeK, bool isCall);
 // Retourne la moyenne des payoffs d'une liste de trajectoires
 double calculerMoyennePayOffs(list<list<double> > l, double strikeK, bool isCall);
 
-double getPrix(double prixS0, long N, long periodT, double r, double ecartType, double strikeK, bool isCall);
+double getPrixMC(double prixS0, long N, long periodT, double r, double ecartType, double strikeK, bool isCall);
 
-string menu();
+string MonteCarloMenu();
 
-void user_getPrixOption(bool isCall);
+void user_getPrixOptionMC(bool isCall);
 
-int main();
+int MonteCarloMain();
 
 #endif /* PROJET_MONTECARLO_MONTECARLO_HPP_ */

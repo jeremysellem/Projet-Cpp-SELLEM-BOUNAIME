@@ -58,10 +58,12 @@ double getPrixPut(double prixSt, double ecartType, long periodT, double tauxR, d
 // double getSensibiliteRho();
 // double getSensibiliteThega();
 
-void user_getPrixCall() {
+void user_getPrixBS(bool isCall) {
 
 	string answer = "";
-	cout << "Paramètres du Call :" << endl;
+	string optionType = isCall ? "Call : " : "Put : ";
+
+	cout << "Paramètres du " << optionType << endl;
 	cout << "Volatilité : ";
 	cin >> answer;
 	double ecartType = atof(answer.c_str());
@@ -92,71 +94,46 @@ void user_getPrixCall() {
 	cin >> answer;
 	double dividende = atof(answer.c_str());
 
+	// Calculer le prix
+	double result = isCall ? getPrixCall(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) : getPrixPut(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende);
 	cout << "---------------------" << endl;
-	cout << "Prix du Call : " << getPrixCall(prixSt, ecartType, periodT, tauxR, prixStrikeK,dividende) << endl;
-
+	cout << "Prix du " << optionType << result;
 }
 
-void user_getPrixPut() {
-	string answer = "";
-	cout << "Paramètres du Put :" << endl;
-	cout << "Volatilité : ";
-	cin >> answer;
-	double ecartType = atof(answer.c_str());
-
-	long periodT;
-	try {
-		cout << "Périodes : ";
-		cin >> answer;
-		periodT = stoi(answer.c_str());
-	}
-	catch (invalid_argument&) {
-		periodT = 1;
-	}
-
-	cout << "S0 : ";
-	cin >> answer;
-	double prixSt = atof(answer.c_str());
-
-	cout << "K : ";
-	cin >> answer;
-	double prixStrikeK = atof(answer.c_str());
-
-	cout << "R : ";
-	cin >> answer;
-	double tauxR = atof(answer.c_str());
-
-    cout << "dividende : ";
-	cin >> answer;
-	double dividende = atof(answer.c_str());
-
-	cout << "---------------------" << endl;
-	cout << "Prix du Put : " << getPrixPut(prixSt, ecartType, periodT, tauxR, prixStrikeK,dividende) << endl;
+string BlackAndScholesMenu() {
+	// Dire bonjour
+	cout << "----------------------" << endl;
+	cout << "BLACK & SCHOLES MODEL" << endl;
+	cout << "----------------------" << endl;
+	return "1 Call\n2 Put\n3 Retour menu principal\n4 Exit\n\nVotre choix : ";
 }
 
-string menu() {
-	return "\n1 getPrixCall\n2 getPrixPut\n3 exit\nVotre choix : ";
-}
+int BlackAndScholesMain() {
 
-int main() {
-
-	// L'utilisateur arrive sur le menu principal
-	// Tant que sa réponse n'est pas exit on continue
+	// L'utilisateur arrive sur le menu de Binomial
+	// Tant que sa réponse n'est pas Exit ou Retour on continue
 	string answer = "0";
-	while (stoi(answer) != 3) {
-		cout << menu();
+	while (true) {
+		cout << BlackAndScholesMenu();
 		cin >> answer;
 		try {
 			switch (stoi(answer)) {
 				case 1:
-					user_getPrixCall();
+					// Pricing d'un Call
+					user_getPrixBS(true);
 					break;
 				case 2:
-					user_getPrixPut();
+					// Pricing d'un Put
+					user_getPrixBS(false);
 					break;
 				case 3:
+					// Retour au menu principal
 					return 0;
+				case 4:
+					// Fin du programme
+					exit(0);
 				default:
+					// Pas compris donc on reste continue
 					answer = "0";
 					break;
 			}
@@ -164,7 +141,8 @@ int main() {
 		catch (exception&) {
 			answer = "0";
 		}
-	};
+	}
+	return 0;
 }
 
 

@@ -56,17 +56,13 @@ double calculerMoyennePayOffs(list<list<double> > l, double strikeK, bool isCall
 	return calculerPayOffs(l, strikeK, isCall) / l.size();
 }
 
-double getPrix(double prixS0, long N, long periodT, double r, double ecartType, double strikeK, bool isCall) {
+double getPrixMC(double prixS0, long N, long periodT, double r, double ecartType, double strikeK, bool isCall) {
 	list<list<double> > trajectoires = simuler_N_trajectoire(prixS0, N, periodT, r, ecartType);
 	double moyenne_payoffs = calculerMoyennePayOffs(trajectoires, strikeK, isCall);
 	return exp(-r * periodT) * moyenne_payoffs;
 }
 
-string menu() {
-	return "\n1 getPrixCall\n2 getPrixPut\n3 exit\nVotre choix : ";
-}
-
-void user_getPrixOption(bool isCall) {
+void user_getPrixOptionMC(bool isCall) {
 
 	string answer = "";
 	string optionType = isCall ? "Call : " : "Put : ";
@@ -103,28 +99,43 @@ void user_getPrixOption(bool isCall) {
 	double tauxR = atof(answer.c_str());
 
 	cout << "---------------------" << endl;
-	cout << "Prix du " << optionType << getPrix(prixS0, nbSimulations, periodT, tauxR, ecartType, prixStrikeK, isCall) << endl;
+	cout << "Prix du " << optionType << getPrixMC(prixS0, nbSimulations, periodT, tauxR, ecartType, prixStrikeK, isCall) << endl;
 }
 
-int main() {
+string MonteCarloMenu() {
+	// Dire bonjour
+	cout << "----------------------" << endl;
+	cout << "MONTE CARLO MODEL" << endl;
+	cout << "----------------------" << endl;
+	return "1 Call\n2 Put\n3 Retour menu principal\n4 Exit\n\nVotre choix : ";
+}
 
-	// L'utilisateur arrive sur le menu principal
-	// Tant que sa réponse n'est pas exit on continue
+int MonteCarloMain() {
+
+	// L'utilisateur arrive sur le menu de Binomial
+	// Tant que sa réponse n'est pas Exit ou Retour on continue
 	string answer = "0";
-	while (stoi(answer) != 3) {
-		cout << menu();
+	while (true) {
+		cout << MonteCarloMenu();
 		cin >> answer;
 		try {
 			switch (stoi(answer)) {
 				case 1:
-					user_getPrixOption(true);
+					// Pricing d'un Call
+					user_getPrixOptionMC(true);
 					break;
 				case 2:
-					user_getPrixOption(false);
+					// Pricing d'un Put
+					user_getPrixOptionMC(false);
 					break;
 				case 3:
+					// Retour au menu principal
 					return 0;
+				case 4:
+					// Fin du programme
+					exit(0);
 				default:
+					// Pas compris donc on reste continue
 					answer = "0";
 					break;
 			}
@@ -132,5 +143,6 @@ int main() {
 		catch (exception&) {
 			answer = "0";
 		}
-	};
+	}
+	return 0;
 }

@@ -17,21 +17,30 @@
 // Fonction max()
 #include <algorithm>
 
-# define M_PI           3.14159265358979323846  /* pi */
+//# define M_PI           3.14159265358979323846  /* pi */
 
 using namespace std;
 
-int simulation_trajectoire_mvt_brownien();
 double calculerD1(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende);
 double calculerD2(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende);
+double loi_normale(double a, double b, double n);
 double calculerLoiNormaleD1(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende);
 double calculerLoiNormaleD2(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende);
+double calculerLoiNormale_D1(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende);
+double calculerLoiNormale_D2(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende);
 double getPrixCall(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende);
 double getPrixPut(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende);
-double getSensibiliteDelta();
-double getSensibiliteGamma();
-double getSensibiliteVega();
-double getSensibiliteRho();
-double getSensibiliteThega();
+
+// double getSensibiliteDelta();
+// double getSensibiliteGamma();
+// double getSensibiliteVega();
+// double getSensibiliteRho();
+// double getSensibiliteThega();
+
+void user_getPrixBS(bool isCall);
+
+string BlackAndScholesMenu();
+
+int BlackAndScholesMain();
 
 #endif /* PROJET_BLACKANDSHOLES_BLACKANDSHOLES_HPP_ */
