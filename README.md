@@ -6,46 +6,46 @@
 1. [Contexte](#contexte)
 2. [Installation](#installation)
 3. [Compilation](#compilation)
-4. [Collaboration](#collaboration)
-5. [FAQs](#faqs)
+4. [Naviguer dans les menus](#naviguer-dans-les-menus)
+5. [Pricing](#pricing)
 ### Contexte
 ***
-Ce projet a été réalisé dans le cadre du cours de C++ dispensé dans le Master 2 IF de l'Université Paris Dauphine, promotion 2021 - 2022.
+Ce projet a été réalisé dans le cadre du cours de C++ dispensé dans le Master 2 IF de l'Université Paris Dauphine, promotion 2021 - 2022. Le but est d'implémenter les méthodes de pricing d'option suivantes : Binomiale, Black & Scholes, Monte Carlo ainsi que le pricing de contrats à terme (futures/forwards).
 ## Installation
 ***
 Ce projet nécessite l'installation de C++17. Vous trouverez ci-après des guides d'installation pour votre machine :
 * [Install C17](https://docs.microsoft.com/fr-fr/cpp/overview/install-c17-support?view=msvc-170): Docs Microsoft
-* [On Windows](https://www.geeksforgeeks.org/complete-guide-to-install-c17-in-windows/): Geeks For geeks
+* [On Windows](https://www.geeksforgeeks.org/complete-guide-to-install-c17-in-windows/): Geeks For Geeks
 ## Compilation
 ***
 Pour exécuter le programme, il faut d'abord cloner le repo Git puis compiler et enfin lancer :
 ```
-$ git clone https://example.com
-$ cd ../path/to/the/file
-$ npm install
-$ npm start
+$ git clone https://github.com/jeremysellem/Projet-Cpp-SELLEM-BOUNAIME.git
+$ cd Projet-Cpp-SELLEM-BOUNAIME
+$ g++ MainPricer.cpp -o MainPricer -std=c++17
+$ ./MainPricer
 ```
 ## Naviguer dans les menus
 ***
-Give instructions on how to collaborate with your project.
-> Maybe you want to write a quote in this part. 
-> It should go over several rows?
-> This is how you do it.
-### Screenshot
-![Image text](https://www.united-internet.de/fileadmin/user_upload/Brands/Downloads/Logo_IONOS_by.jpg)
-## FAQs
+Vous arrivez à présent sur le menu principal, de celui-ci vous accéderez aux différentes méthodes de pricing :
+
+![Image text](Images/Compilation&Execution.png)
+
+Entrez le chiffre de votre choix et pressez la touche Entrée afin d'accéder au modèle (exemple : Monte Carlo) :
+
+![Image text](Images/Choix Modele.png)
+
+## Pricing
 ***
-A list of frequently asked questions
-1. **This is a question in bold**
-Answer of the first question with _italic words_. 
-2. __Second question in bold__ 
-To answer this question we use an unordered list:
-* First point
-* Second Point
-* Third point
-3. **Third question in bold**
-Answer of the third question with *italic words*.
-4. **Fourth question in bold**
-| Headline 1 in the tablehead | Headline 2 in the tablehead | Headline 3 in the tablehead |
-|:--------------|:-------------:|--------------:|
-| text-align left | text-align center | text-align right |
+Choississez le type d'option de la même manière (chiffre + touche Entrée).
+
+Il est temps de renseigner les paramètres de votre option ! Une à une vous pourrez renseigner les valeurs (utiliser le . pour les nombres flottants) :
+
+![Image text](Images/MonteCarlo.png)
+
+## Vérification
+***
+Vous pouvez comparer les résultats produits avec les nombreux pricers disponibles en ligne, parmi lesquels :
+* [Binomial Tree](https://www.hoadley.net/options/binomialtree.aspx?tree=B)
+* [Black & Scholes](https://financial-calculators.com/options-calculator)
+* [Monte Carlo](http://janroman.dhis.org/calc/MonteCarlo.php)
