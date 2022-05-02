@@ -6,11 +6,11 @@
 1. [Contexte](#contexte)
 2. [Installation](#installation)
 3. [Compilation](#compilation)
-4. [Collaboration](#collaboration)
+4. [Naviguer dans les menus](#naviguer dans les menus)
 5. [FAQs](#faqs)
 ### Contexte
 ***
-Ce projet a été réalisé dans le cadre du cours de C++ dispensé dans le Master 2 IF de l'Université Paris Dauphine, promotion 2021 - 2022.
+Ce projet a été réalisé dans le cadre du cours de C++ dispensé dans le Master 2 IF de l'Université Paris Dauphine, promotion 2021 - 2022. Le but est d'implémenter les méthodes de pricing d'option suivantes : Binomiale, Black & Scholes, Monte Carlo ainsi que le pricing de contrats à terme (futures/forwards).
 ## Installation
 ***
 Ce projet nécessite l'installation de C++17. Vous trouverez ci-après des guides d'installation pour votre machine :
@@ -20,18 +20,14 @@ Ce projet nécessite l'installation de C++17. Vous trouverez ci-après des guide
 ***
 Pour exécuter le programme, il faut d'abord cloner le repo Git puis compiler et enfin lancer :
 ```
-$ git clone https://example.com
-$ cd ../path/to/the/file
-$ npm install
-$ npm start
+$ git clone https://github.com/jeremysellem/Projet-Cpp-SELLEM-BOUNAIME.git
+$ cd Projet-Cpp-SELLEM-BOUNAIME
+$ g++ MainPricer.cpp -o MainPricer -std=c++17
+$ ./MainPricer
 ```
 ## Naviguer dans les menus
 ***
-Give instructions on how to collaborate with your project.
-> Maybe you want to write a quote in this part. 
-> It should go over several rows?
-> This is how you do it.
-### Screenshot
+Vous arrivez à présent sur le menu principal, de celui-ci vous accéderez aux différentes méthodes de pricing :
 ![Image text](https://www.united-internet.de/fileadmin/user_upload/Brands/Downloads/Logo_IONOS_by.jpg)
 ## FAQs
 ***
