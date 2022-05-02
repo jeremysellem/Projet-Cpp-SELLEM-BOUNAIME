@@ -97,7 +97,7 @@ void user_getPrixBS(bool isCall) {
 	// Calculer le prix
 	double result = isCall ? getPrixCall(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) : getPrixPut(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende);
 	cout << "---------------------" << endl;
-	cout << "Prix du " << optionType << result;
+	cout << "Prix du " << optionType << result << endl;
 }
 
 string BlackAndScholesMenu() {
