@@ -33,7 +33,7 @@ Vous arrivez à présent sur le menu principal, de celui-ci vous accéderez aux 
 
 Entrez le chiffre de votre choix et pressez la touche Entrée afin d'accéder au modèle (exemple : Monte Carlo) :
 
-![Image text](Images/Choix Modele.png)
+![Image text](Images/ChoixModele.png)
 
 ## Pricing
 ***
