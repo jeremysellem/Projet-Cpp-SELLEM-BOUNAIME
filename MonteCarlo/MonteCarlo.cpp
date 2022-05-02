@@ -56,10 +56,24 @@ double calculerMoyennePayOffs(list<list<double> > l, double strikeK, bool isCall
 	return calculerPayOffs(l, strikeK, isCall) / l.size();
 }
 
-double getPrixMC(double prixS0, long N, long periodT, double r, double ecartType, double strikeK, bool isCall) {
+// Retourne l'écart type payoffs d'une liste de trajectoires
+double calculerEcartTypePayOffs(list<list<double> > l, long N, double strikeK, bool isCall) {
+	double moyenne = calculerMoyennePayOffs(l, strikeK, isCall);
+	double sommeDesCarres = 0.0;
+	list<list<double> >::iterator it;
+	for (it = l.begin(); it != l.end(); it++)
+		sommeDesCarres += pow(calculerPayOff((*it), strikeK, isCall), 2);
+
+	double variance = sommeDesCarres / N - moyenne * moyenne;
+	double ecartType = sqrt(variance);
+	return ecartType;
+}
+
+tuple<double, double> getPrixMC(double prixS0, long N, long periodT, double r, double ecartType, double strikeK, bool isCall) {
 	list<list<double> > trajectoires = simuler_N_trajectoire(prixS0, N, periodT, r, ecartType);
-	double moyenne_payoffs = calculerMoyennePayOffs(trajectoires, strikeK, isCall);
-	return exp(-r * periodT) * moyenne_payoffs;
+	double prixMC = exp(-r * periodT) * calculerMoyennePayOffs(trajectoires, strikeK, isCall);
+	double ecartType_payoffs = calculerEcartTypePayOffs(trajectoires, N, strikeK, isCall);
+	return {prixMC, ecartType_payoffs};
 }
 
 void user_getPrixOptionMC(bool isCall) {
@@ -99,7 +113,9 @@ void user_getPrixOptionMC(bool isCall) {
 	double tauxR = atof(answer.c_str());
 
 	cout << "---------------------" << endl;
-	cout << "Prix du " << optionType << getPrixMC(prixS0, nbSimulations, periodT, tauxR, ecartType, prixStrikeK, isCall) << endl;
+	auto [result, ecart] = getPrixMC(prixS0, nbSimulations, periodT, tauxR, ecartType, prixStrikeK, isCall);
+	cout << "Prix du " << optionType << result << endl;
+	cout << "Intervalle de confiance à 95% : [" << result - 1.96 * ecart/sqrt(nbSimulations) << "," << result + 1.96 * ecart/sqrt(nbSimulations) << "]" << endl;
 }
 
 string MonteCarloMenu() {

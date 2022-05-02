@@ -14,6 +14,9 @@
 // Loi normale
 #include <random>
 
+// Make tuple
+#include <tuple>
+
 using namespace std;
 
 double genererNbreLoiNormale();
@@ -31,7 +34,7 @@ double calculerPayOffs(list<list<double> > l, double strikeK, bool isCall);
 // Retourne la moyenne des payoffs d'une liste de trajectoires
 double calculerMoyennePayOffs(list<list<double> > l, double strikeK, bool isCall);
 
-double getPrixMC(double prixS0, long N, long periodT, double r, double ecartType, double strikeK, bool isCall);
+tuple<double, double> getPrixMC(double prixS0, long N, long periodT, double r, double ecartType, double strikeK, bool isCall);
 
 string MonteCarloMenu();
 
