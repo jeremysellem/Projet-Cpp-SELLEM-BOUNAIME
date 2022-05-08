@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <list>
+#include <chrono>
 
 // Loi normale
 #include <random>

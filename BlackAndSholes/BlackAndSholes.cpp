@@ -7,9 +7,6 @@
 
 #include "BlackAndSholes.hpp"
 
-// int simulation_trajectoire_mvt_brownien(){
-
-// }
 double calculerD1(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende){
     return (log(prixSt/prixStrikeK) + (tauxR - dividende + ecartType*ecartType/2) * periodT ) / (ecartType * sqrt(periodT));
 }
@@ -51,12 +48,6 @@ double getPrixCall(double prixSt, double ecartType, long periodT, double tauxR, 
 double getPrixPut(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende){
     return - prixSt * calculerLoiNormale_D1(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende) + prixStrikeK * exp(-tauxR*periodT) * calculerLoiNormale_D2(prixSt, ecartType, periodT, tauxR, prixStrikeK, dividende);
 }
-
-// double getSensibiliteDelta();
-// double getSensibiliteGamma();
-// double getSensibiliteVega();
-// double getSensibiliteRho();
-// double getSensibiliteThega();
 
 void user_getPrixBS(bool isCall) {
 
@@ -144,9 +135,3 @@ int BlackAndScholesMain() {
 	}
 	return 0;
 }
-
-
-// int main(){
-//     cout<< calculerLoiNormaleD1(100,0.25,5,0.01,100,0);
-//     return 0;
-// }

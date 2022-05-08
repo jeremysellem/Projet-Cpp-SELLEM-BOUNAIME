@@ -22,8 +22,7 @@ Pour exécuter le programme, il faut d'abord cloner le repo Git puis compiler et
 ```
 $ git clone https://github.com/jeremysellem/Projet-Cpp-SELLEM-BOUNAIME.git
 $ cd Projet-Cpp-SELLEM-BOUNAIME
-$ g++ MainPricer.cpp -o MainPricer -std=c++17
-$ ./MainPricer
+$ make
 ```
 ## Naviguer dans les menus
 ***

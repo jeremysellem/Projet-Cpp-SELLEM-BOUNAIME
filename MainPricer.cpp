@@ -9,6 +9,7 @@
 #include "Binomiale/Binomiale.cpp"
 #include "BlackAndSholes/BlackAndSholes.cpp"
 #include "MonteCarlo/MonteCarlo.cpp"
+#include "Futures_forwards/Futures_forwards.cpp"
 
 using namespace std;
 
@@ -44,7 +45,7 @@ int main() {
 					break;
 				case 4:
 					// Lancer le menu principal des contrats à terme
-					cout << "Futures/Forward not imlplemented yet" << endl;
+					Futures_forwardsMain();
 					break;
 				case 5:
 					// Exit

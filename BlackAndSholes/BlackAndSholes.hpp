@@ -17,7 +17,7 @@
 // Fonction max()
 #include <algorithm>
 
-//# define M_PI           3.14159265358979323846  /* pi */
+# define M_PI           3.14159265358979323846  /* pi */
 
 using namespace std;
 
@@ -31,11 +31,6 @@ double calculerLoiNormale_D2(double prixSt, double ecartType, long periodT, doub
 double getPrixCall(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende);
 double getPrixPut(double prixSt, double ecartType, long periodT, double tauxR, double prixStrikeK, double dividende);
 
-// double getSensibiliteDelta();
-// double getSensibiliteGamma();
-// double getSensibiliteVega();
-// double getSensibiliteRho();
-// double getSensibiliteThega();
 
 void user_getPrixBS(bool isCall);
 
